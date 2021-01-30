@@ -1,14 +1,21 @@
 <template>
   <div id="app">
-    <router-view/>
+    <M-Header></M-Header>
   </div>
 </template>
 
-<script>
+<script type="text/ecmascript-6">
+import MHeader from './components/m-header/m-header.vue'
 export default {
-  name: 'App'
+  components: {
+    MHeader
+  }
 }
 </script>
 
-<style>
+<style  scoped lang="stylus" rel="stylesheet/stylus">
+@import '~common/stylus/variable'
+@import '~common/stylus/mixin'
+#app 
+  background-color: $color-background
 </style>
