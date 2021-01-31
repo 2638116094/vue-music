@@ -1,5 +1,7 @@
 <template>
-  <h1>歌手页面</h1>
+  <h1>
+      排行页面
+  </h1>
 </template>
 
 <script>
