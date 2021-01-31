@@ -16,6 +16,6 @@ export default {
 <style  scoped lang="stylus" rel="stylesheet/stylus">
 @import '~common/stylus/variable'
 @import '~common/stylus/mixin'
-#app 
-  background-color: $color-background
+#app
+    background-color: $color-background
 </style>
