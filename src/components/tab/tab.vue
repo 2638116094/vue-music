@@ -13,13 +13,16 @@
     <router-link tag="div" class="tab-item" to="/tab/search">
       <span class="tab-link">搜索</span>
     </router-link>
-    <router-view></router-view>
+    <keep-alive>
+      <router-view /> 
+    </keep-alive>
   </div>
 </template>
 
 <script type="text/ecmascript">
 import MHeader from '@/components/m-header/m-header'
 export default {
+  name: 'tab',
   components: {
     MHeader
   }
