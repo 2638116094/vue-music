@@ -18,7 +18,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-import { getRecommend, getDiscList } from 'api/recommend'
+import { getRecommend, getDiscList, getRecommends } from 'api/recommend'
 import { ERR_OK } from 'api/config'
 import Slider from '../../base/slider/slider'
 export default {
@@ -34,27 +34,30 @@ export default {
   created() {
     this._getRecommend();
     this._getDiscList()
+    this.test()
   },
   methods: {
     _getRecommend() {
       getRecommend().then((res) => {
         if (res.code === ERR_OK) {
-          this.recommends = res.data.slider;
-          console.log(res.data);
+          this.recommends = res.data.slider
         }
       });
     },
     _getDiscList() {
       getDiscList().then(res => {
-        console.log(res)
         if (res.code === ERR_OK) {
-          console.log(res.data)
         }
       })
     },
     loadImage() {
       console.log(1);
     },
+    test() {
+      getRecommends().then(res => {
+        console.log(res)
+      })
+    }
   },
 };
 </script>

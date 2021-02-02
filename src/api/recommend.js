@@ -30,3 +30,12 @@ export function getDiscList() {
   })
   return jsonp(url, data, options)
 }
+export function getRecommends() {
+  var url = '/api/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg'
+  return axios.get(url, {
+    headers: {
+      'referer': 'https://c.y.qq.com/',
+      'host': 'c.y.qq.com'
+    }
+  })
+}
