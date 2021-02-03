@@ -136,7 +136,7 @@ export default {
       position: absolute
       right: 0
       left: 0
-      bottom: 12px
+      bottom: 5px
       text-align: center
       font-size: 0
       .dot

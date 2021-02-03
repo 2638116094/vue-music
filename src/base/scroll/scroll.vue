@@ -23,7 +23,7 @@
       },
       data: {
         type: Array,
-        default: null
+        default: () => []
       },
       pullup: {
         type: Boolean,

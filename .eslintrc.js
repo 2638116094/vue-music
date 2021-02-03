@@ -33,7 +33,8 @@ module.exports = {
     'no-trailing-spaces': 0,
     'no-multiple-empty-lines': 0,
     'comma-dangle': 0,
-    'indent':["off",2]
+    'indent':["off",2],
+    'no-muti-spaces': '0'
 
   }
 }
