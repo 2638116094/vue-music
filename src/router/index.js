@@ -20,7 +20,13 @@ export default new Router({
     }, {
       path: '/tab/singer',
       name: 'singer',
-      component: () => import('@/components/singer/singer')
+      component: () => import('@/components/singer/singer'),
+      children: [
+        {
+          path: ':id',
+          component: () => import('@/components/singer/singer-detail')
+        }
+      ]
     }, {
       path: '/tab/rank',
       name: 'rank',

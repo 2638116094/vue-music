@@ -21,6 +21,7 @@
             v-for="item in group.items"
             :key="item.id"
             class="list-group-item"
+            @click="selectItem(item)"
           >
             <img :src="item.avatar" class="avatar" alt="" />
             <span class="name">{{ item.name }}</span>
@@ -39,17 +40,17 @@
           v-for="(item, index) in showcutList"
           :key="index"
           :data-index="index"
-          :class="{'current' : currentIndex === index}"
+          :class="{ current: currentIndex === index }"
         >
           {{ item }}
         </li>
       </ul>
     </div>
     <div class="list-fixed" ref="fixed" v-show="fixedTitle">
-        <h1 class="fixed-title">{{fixedTitle}}</h1>
+      <h1 class="fixed-title">{{ fixedTitle }}</h1>
     </div>
     <div v-show="!data.length" class="loading-container">
-        <loading></loading>
+      <loading></loading>
     </div>
   </scroll>
 </template>
@@ -132,6 +133,12 @@ export default {
                 height += item.clientHeight
                 this.listHeight.push(height)
             }
+        },
+        selectItem(item) {
+            console.log(item)
+            this.$router.push({
+        path: `/tab/singer/${item.id}`
+      })
         }
     },
     watch: {
