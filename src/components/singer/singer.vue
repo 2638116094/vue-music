@@ -10,6 +10,7 @@ import { getSingerList } from 'api/singer'
 import { ERR_OK } from 'api/config'
 import Singer from 'common/js/singer'
 import ListView from 'base/listview/listview'
+import { mapMutations } from 'vuex'
 
 
 const HOT_SINGER_LEN = 10

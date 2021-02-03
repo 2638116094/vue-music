@@ -59,6 +59,7 @@
 import Scroll from 'base/scroll/scroll'
 import { getData } from 'common/js/dom'
 import Loading from '../loading/loading.vue'
+import { mapMutations } from 'vuex'
 const ANCHOR_HEIGHT = 18
 const TITLE_HEIGHT = 30
 export default {
@@ -136,10 +137,14 @@ export default {
         },
         selectItem(item) {
             console.log(item)
-            this.$router.push({
-        path: `/tab/singer/${item.id}`
-      })
-        }
+              this.$router.push({
+              path: `/tab/singer/${item.id}`
+            })
+            this.setSinger(item)
+        },
+        ...mapMutations({
+          setSinger: 'SET_SINGER'
+        })
     },
     watch: {
         data() {

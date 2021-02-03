@@ -5,8 +5,13 @@
 </template>
 
 <script type="text/ecmascript-6">
+// import { mapMutations } from 'vuex'
 export default {
-
+  methods: {
+    // ...mapMutations({
+    //   setSinger: 'SET_SINGER'
+    // })
+  }
 }
 </script>
 
