@@ -1,10 +1,25 @@
 <template>
-  <h1>歌手页面</h1>
+<div class="singer">df</div>
 </template>
 
-<script>
+<script type="text/ecmascript-6">
+import { getSingerList } from 'api/singer'
 export default {
-
+  data() {
+    return {
+      singers: []
+    }
+  },
+  created() {
+      this._getSingerList()
+  },
+  methods: {
+    _getSingerList() {
+      getSingerList().then(res => {
+        console.log(res)
+      })
+    }
+  }
 }
 </script>
 

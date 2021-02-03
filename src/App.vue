@@ -1,5 +1,7 @@
 <template>
   <div id="app">
+    <m-header></m-header>
+    <tab></tab>
     <keep-alive>
       <router-view />
     </keep-alive>
@@ -8,8 +10,9 @@
 
 <script type="text/ecmascript-6">
 import MHeader from 'components/m-header/m-header.vue'
-import Tab from 'components/tab/tab'
+import tab from './components/tab/tab.vue'
 export default {
+  components: { tab, MHeader },
 }
 </script>
 

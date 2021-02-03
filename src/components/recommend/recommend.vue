@@ -1,40 +1,62 @@
 <template>
   <div class="recommend" ref="recommend">
-    <div class="recommend-content">
-      <div class="silder-wrapper" ref="sliderWrapper" v-if="recommends.length">
-        <slider>
-          <div v-for="item in recommends" :key="item.id" class="slider-item">
-            <a :href="item.linkUrl">
-              <img class="needsclick" @load="loadImage" :src="item.picUrl" />
-            </a>
-          </div>
-        </slider>
+    <scroll ref="scroll" class="recommend-content" :data="discList">
+      <div>
+        <div v-if="recommends.length" class="slider-wrapper" ref="sliderWrapper">
+          <slider>
+            <div v-for="item in recommends" :key="item.id">
+              <a :href="item.linkUrl">
+                <img class="needsclick" @load="loadImage" :src="item.picUrl">
+              </a>
+            </div>
+          </slider>
+        </div>
+        <div class="recommend-list">
+          <h1 class="list-title">热门歌单推荐</h1>
+          <ul>
+            <li @click="selectItem(item)" v-for="item in discList" :key="item.id" class="item">
+              <div class="icon">
+                <img width="60" height="60" :src="item.imgurl">
+              </div>
+              <div class="text">
+                <h2 class="name" v-html="item.creator.name"></h2>
+                <p class="desc" v-html="item.dissname"></p>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
-      <div class="recommend-list">
-        <h1 class="list-title">热门歌单推荐</h1>
+      <div class="loading-container" v-show="!discList.length">
+        <loading></loading>
       </div>
-    </div>
+    </scroll>
+    <router-view></router-view>
   </div>
 </template>
-
 <script type="text/ecmascript-6">
-import { getRecommend, getDiscList, getRecommends } from 'api/recommend'
+import { getRecommend } from 'api/recommend'
+import datas from './data.json'
 import { ERR_OK } from 'api/config'
 import Slider from '../../base/slider/slider'
+import Scroll from '../../base/scroll/scroll.vue'
+import Loading from '../../base/loading/loading.vue'
 export default {
   data() {
     return {
       recommends: [],
-      disclist: '',
+      discList: '',
     };
   },
   components: {
     Slider,
+    Scroll,
+    Loading
   },
   created() {
-    this._getRecommend();
-    this._getDiscList()
+    setTimeout(() => {
+    this._getRecommend()
     this.test()
+    }, 1000)
   },
   methods: {
     _getRecommend() {
@@ -44,26 +66,21 @@ export default {
         }
       });
     },
-    _getDiscList() {
-      getDiscList().then(res => {
-        if (res.code === ERR_OK) {
-        }
-      })
-    },
     loadImage() {
-      console.log(1);
+      this.$refs.scroll.refresh()
     },
     test() {
-      getRecommends().then(res => {
-        console.log(res)
-      })
+      console.log(datas)
+      if (datas.code === ERR_OK) {
+        this.discList = datas.data.list
+      }
     }
   },
 };
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
-@import '~common/stylus/variable';
+  @import "~common/stylus/variable"
 
   .recommend
     position: fixed
@@ -100,10 +117,11 @@ export default {
             flex: 1
             line-height: 20px
             overflow: hidden
-            font-size: $font-size-medium
+            font-size: $font-size-small
             .name
               margin-bottom: 10px
               color: $color-text
+            font-size: $font-size-small
             .desc
               color: $color-text-d
       .loading-container

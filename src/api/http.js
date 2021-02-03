@@ -2,7 +2,8 @@ import axios from 'axios'
 
 axios.interceptors.request.use(config => {
     console.log('请求拦截config---', config)
-    // config.headers['host'] = 'c.y.qq.com'
+    
+    console.log('requset', config)
     return config
 }, err => {
     console.log(err)

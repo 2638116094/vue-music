@@ -2,17 +2,12 @@
   <div class="m-header">
       <div class="icon"></div>
       <div class="text">Chicken Music</div>
-      <span @click="login">登陆</span>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
 export default {
     methods: {
-        login() {
-            this.$router.push('/home')
-            console.log('1')
-        }
     }
 }
 </script>

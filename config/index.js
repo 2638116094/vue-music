@@ -17,8 +17,13 @@ module.exports = {
       '/api': {
         target: 'https://c.y.qq.com/',
         changeOrigin: true,
+        secure: false,
         pathRewrite: {
           '^/api': ''
+        },
+        headers: {
+          referer: 'https://c.y.qq.com',
+          host: 'c.y.qq.com'
         }
       }
     },
