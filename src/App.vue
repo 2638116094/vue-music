@@ -21,6 +21,5 @@ export default {
 
 #app {
   background-color: $color-background;
-  color: $color-theme;
 }
 </style>

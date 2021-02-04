@@ -79,8 +79,14 @@ export default {
       return hot.concat(ret) 
     },
     selectSinger(singer) {
-      console.log(0)
-    }
+      this.$router.push({
+        path: `/singer/${singer.id}`
+      })
+      this.setSinger(singer)
+    },
+    ...mapMutations({
+      setSinger: 'SET_SINGER'
+    })
   }
 }
 </script>
@@ -88,7 +94,7 @@ export default {
 <style scoped lang="stylus" ref="stylesheet/stylus">
   .singer
     position: fixed
-    top: 88px
+    top: 80px
     bottom: 0
     width: 100%
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <h1>
+  <h1 class="wrap">
       排行页面
   </h1>
 </template>
@@ -10,6 +10,10 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped lang="stylus" rel="stylesheet/stylus">
+@import '~common/stylus/variable'
+@import '~common/stylus/mixin'
+.wrap
+  color: $color-text
+  text-align center
 </style>

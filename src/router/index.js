@@ -7,19 +7,14 @@ Vue.use(Router)
 export default new Router({
   routes: [{
       path: '/',
-      redirect: '/tab/recommend'
+      redirect: '/recommend'
     },
     {
-      path: '/',
-      redirect: '/tab/recommend'
-    },
-    {
-      path: '/tab/recommend',
+      path: '/recommend',
       name: 'recommend',
       component: () => import('@/components/recommend/recommend')
     }, {
-      path: '/tab/singer',
-      name: 'singer',
+      path: '/singer',
       component: () => import('@/components/singer/singer'),
       children: [
         {
@@ -28,11 +23,11 @@ export default new Router({
         }
       ]
     }, {
-      path: '/tab/rank',
+      path: '/rank',
       name: 'rank',
       component: () => import('@/components/rank/rank')
     }, {
-      path: '/tab/search',
+      path: '/search',
       name: 'search',
       component: () => import('@/components/search/search')
 
