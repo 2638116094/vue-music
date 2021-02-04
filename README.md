@@ -1,23 +1,31 @@
-# vue-music
+# Vue-music
+>根据q音乐模拟音乐播放器h5项目
+##first
+```c
+npm i 或者 npm install 或者 使用 cnpm 
 
-> A Vue.js project
-
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
+## second
+```c
 npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-```
->jsonp封装
-
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+```javascript
+│  .babelrc
+│  .editorconfig
+│  .gitignore
+│  .postcssrc.js
+│  index.html
+├─build
+├─config
+│      dev.env.js
+│      index.js
+│      prod.env.js
+├─src
+│  │  App.vue
+│  │  main.js
+│  │          axios.js
+│  │          global.js
+│  ├─components
+│  ├─router
+│  │      index.js
+│  └─views
+│          index.vue
+└─static
