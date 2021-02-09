@@ -1,11 +1,12 @@
 <template>
   <div class="music-list">
-    <div class="back">
+    <div class="back" ref="back">
+      <i class="icon-back" @click="back">返回</i>
     </div>
       <h1 class="title">{{ title }}</h1>
     <div class="bg-image" :style="bgStyle" ref="bgImage">
-       <div class="play-wrapper">
-        <div ref="playBtn"  class="play">
+      <div class="play-wrapper">
+        <div class="play" v-show="songs.length > 0" ref="playBtn">
           <i class="icon-play"></i>
           <span class="text">随机播放全部</span>
         </div>
@@ -13,9 +14,17 @@
       <div class="filter" ref="filter"></div>
     </div>
     <div class="bg-layer" ref="layer"></div>
-    <scroll :data="songs" :probe-type="probeType" :listen-scroll="listenScroll" @scroll="scroll" class="list" ref="list">
+    <scroll :data="songs" 
+    :probe-type="probeType" 
+    :listen-scroll="listenScroll" 
+    @scroll="scroll"  
+    class="list" 
+    ref="list">
       <div class="song-list-wrapper">
         <song-list :songs="songs"></song-list>
+      </div>
+      <div class="loading-container" v-show="!songs.length">
+        <loading></loading>
       </div>
     </scroll>
   </div>
@@ -24,9 +33,14 @@
 <script type="text/ecmascript-6">
 import scroll from 'base/scroll/scroll'
 import SongList from 'base/song-list/song-list'
+import { prefixStyle } from 'common/js/dom'
+import Loading from '../../base/loading/loading.vue'
 const RESERVED_HEIGHT = 40
+const transform = prefixStyle('transform')
+const backdrop = prefixStyle('backdrop-filter')
+
 export default {
-  components: { scroll, SongList },
+  components: { scroll, SongList, Loading },
     props: {
         baImage: {
             type: String,
@@ -58,31 +72,46 @@ export default {
     },
     mounted() {
       this.imageHeight = this.$refs.bgImage.clientHeight
-      this.minTranslateY = -this.imageHeight
+      this.minTranslateY = -this.imageHeight + RESERVED_HEIGHT
       this.$refs.list.$el.style.top = this.imageHeight + 'px'
     },
     methods: {
       scroll(pos) {
         this.scrollY = pos.y
+      },
+      back() {
+        this.$router.back()
       }
     },
     watch: {
       scrollY(newVal) {
         let tranlateY = Math.max(this.minTranslateY, newVal)
         let zIndex = 0
-        this.$refs.layer.style['transform'] = `translate3d(0,${tranlateY}px,0)`
-        this.$refs.layer.style['webkitTransform'] = `translate3d(0,${tranlateY}px,0)`
-        console.log(this.minTranslateY)
+        let scale = 1
+        // 图片放大比例
+        let blur = 0 
+        this.$refs.layer.style[transform] = `translate3d(0, ${tranlateY}px, 0)`
+       
+        const persent = Math.abs(newVal / this.imageHeight)
+        if (newVal > 0) {
+          scale = 1 + persent 
+        } else {
+          blur = Math.min(20 * persent, 20)
+        }
+        this.$refs.filter.style[backdrop] = `blur(${blur}px`
         if (newVal < this.minTranslateY) {
           zIndex = 10
-          this.$refs.bgImage.style.paddingTop = 0
-          this.$refs.baImage.style.height = `${RESERVED_HEIGHT}px`
+          this.$refs.bgImage.style.paddingTop = 0  
+          this.$refs.bgImage.style.height = `${RESERVED_HEIGHT}px`
+          this.$refs.playBtn.style.display = 'none'
         } else {
           this.$refs.bgImage.style.paddingTop = '70%'
-          this.$refs.baImage.style.height = 0
+          this.$refs.bgImage.style.height = 0
+          this.$refs.playBtn.style.display = ''
         }
         this.$refs.bgImage.style.zIndex = zIndex
-      }
+        this.$refs.bgImage.style[transform] = `scale(${scale})`
+       }
     }
 }
 </script>

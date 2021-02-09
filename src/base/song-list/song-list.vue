@@ -5,7 +5,7 @@
         <div class="content">
           <h2 class="name">{{ song.name }}</h2>
           <p class="desc">{{ getDesc(song) }}</p>
-        </div>
+        </div>  
       </li>
     </ul>
   </div>
