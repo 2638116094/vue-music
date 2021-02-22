@@ -193,7 +193,7 @@ export default {
        padding-left: 20px
        font-size: $font-size-small
        color: $color-text-l
-       background: $color-heighlight-background
+       background: $color-highlight-background
      .list-group-item
        display: flex
        align-items: center
@@ -237,7 +237,7 @@ export default {
        padding-left: 20px
        font-size: $font-size-small
        color: $color-text-l
-       background: $color-heighlight-background
+       background: $color-highlight-background
    .loading-container
      position: absolute
      width: 100%

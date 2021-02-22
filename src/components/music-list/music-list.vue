@@ -1,7 +1,7 @@
 <template>
   <div class="music-list">
     <div class="back" ref="back">
-      <i class="icon-back" @click="back">返回</i>
+      <span class="icon-back" @click="back">返回</span>
     </div>
       <h1 class="title">{{ title }}</h1>
     <div class="bg-image" :style="bgStyle" ref="bgImage">
@@ -15,13 +15,13 @@
     </div>
     <div class="bg-layer" ref="layer"></div>
     <scroll :data="songs" 
-    :probe-type="probeType" 
-    :listen-scroll="listenScroll" 
-    @scroll="scroll"  
-    class="list" 
-    ref="list">
+            :probe-type="probeType" 
+            :listen-scroll="listenScroll" 
+            @scroll="scroll"  
+            class="list" 
+            ref="list">
       <div class="song-list-wrapper">
-        <song-list :songs="songs"></song-list>
+        <song-list @select="selectItem" :songs="songs"></song-list>
       </div>
       <div class="loading-container" v-show="!songs.length">
         <loading></loading>
@@ -35,6 +35,8 @@ import scroll from 'base/scroll/scroll'
 import SongList from 'base/song-list/song-list'
 import { prefixStyle } from 'common/js/dom'
 import Loading from '../../base/loading/loading.vue'
+import { mapActions } from 'vuex'
+
 const RESERVED_HEIGHT = 40
 const transform = prefixStyle('transform')
 const backdrop = prefixStyle('backdrop-filter')
@@ -81,7 +83,13 @@ export default {
       },
       back() {
         this.$router.back()
-      }
+      },
+      selectItem(item, index) {
+        this.selectPlay({list: this.songs, index})
+      },
+      ...mapActions([
+        'selectPlay'
+      ])
     },
     watch: {
       scrollY(newVal) {

@@ -1,10 +1,17 @@
 <template>
   <div class="song-list">
     <ul>
-      <li v-for="song in songs" :key="song.id" class="item">
+      <li v-for="(songs, index) in songs" 
+        :key="index" 
+        class="item"
+        @click="selectItem(songs, index)"
+        >
+        <!-- <div class="rank" v-show="rank">
+          <span :class="getRankCls(index)" v-text="getRankText(index)"></span>
+        </div> -->
         <div class="content">
-          <h2 class="name">{{ song.name }}</h2>
-          <p class="desc">{{ getDesc(song) }}</p>
+          <h2 class="name">{{ songs.name }}</h2>
+          <p class="desc">{{ getDesc(songs) }}</p>
         </div>  
       </li>
     </ul>
@@ -12,6 +19,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+import { mapGetters, mapMutations } from 'vuex'
 export default {
     props: {
         songs: {
@@ -19,9 +27,16 @@ export default {
             default: () => []
         }
     },
+    computed: {
+        ...mapGetters(['fullScreen', 'playlist', 'currentSong']),
+    },
     methods: {
-        getDesc(song) {
-            return `${song.singer}·${song.album}`
+        getDesc(songs) {
+            return `${songs.singer}·${songs.album}`
+        },
+        selectItem(songs, index) {
+          console.log(songs)
+          this.$emit('select', songs, index)
         }
     }
 }
