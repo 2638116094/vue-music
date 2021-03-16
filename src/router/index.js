@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 // import Recommend from 'components/recommend/recommend'
 // import Singer from 'components/singer/singer'
+// import Dis from 'components/disc/disc'
+import TopList from 'components/top-list/top-list'
 Vue.use(Router)
 
 export default new Router({
@@ -24,8 +26,13 @@ export default new Router({
       ]
     }, {
       path: '/rank',
-      name: 'rank',
-      component: () => import('@/components/rank/rank')
+      component: () => import('@/components/rank/rank'),
+      children: [
+        { 
+          path: ':id',
+          component: () => import('@/components/top-list/top-list')
+        }
+      ]
     }, {
       path: '/search',
       name: 'search',

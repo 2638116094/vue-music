@@ -1,3 +1,11 @@
+/*
+ * @Description: Create By Adam
+ * @Author: Adam
+ * @Date: 2021-02-22 08:54:15
+ * @LastEditTime: 2021-03-08 14:52:23
+ * @LastEditor: 2638116094@qq.com
+ * @FilePath: \vue-music\src\store\mutations.js
+ */
 import * as types from './mutation-types'
 
 const matutations = {
@@ -21,6 +29,12 @@ const matutations = {
      },
      [types.SET_CURRENT_INDEX](state, index) {
          state.currentIndex = index
+     },
+     [types.SET_CURRENT_INDEX](state, disc) {
+         state.disc = disc
+     },
+     [types.SET_TOP_LIST](state, topList) {
+         state.topList = topList
      }
 }
 
